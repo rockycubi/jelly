@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jelly.app.todos"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.jelly.app.todos.TodoListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <provider
+            android:name="com.jelly.app.todos.AppContentProvider"
+            android:authorities="com.jelly.app.contentprovider" >
+        </provider>
+        
+       	<activity
+            android:name="com.jelly.app.todos.TodoDetailActivity"
+            android:label="@string/title_activity_todo_detail" >
+            <meta-data
+                android:name="layout"
+                android:value="layout/todo_edit"/>
+        </activity>
+        
+    </application>
+
+</manifest>

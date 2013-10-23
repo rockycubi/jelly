@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JellyTodos</string>
+    <string name="action_settings">Settings</string>
+    <string name="test_event_handler">Test Event Handler</string>
+    <string name="menu_insert">Add Item</string>
+    <string name="menu_delete">Delete Todo</string>
+    <string name="todo_summary">Summary</string>
+    <string name="todo_description">Delete Todo</string>
+    <string name="todo_edit_id">Summary</string>
+    <string name="todo_edit_summary">Summary</string>
+    <string name="todo_edit_description">Description</string>
+    <string name="todo_edit_confirm">Confirm</string>
+    <string name="title_activity_todo_detail">TodoDetailActivity</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database 
+    id="todo_database"
+    name="todo.db"
+    class="com.jelly.lib.content.sqlite.JDatabase"
+    schema="raw/todo_schema">
+    <Table
+        name="todo"
+        columns="_id,category,summary,description"/>
+    <Table
+        name="category"
+        columns="_id,name"/>
+</Database>

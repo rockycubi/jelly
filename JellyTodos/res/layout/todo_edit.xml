@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jelly.lib.view.JFormView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jelly="http://schemas.android.com/apk/res/com.jelly.app.todos"
+    class="com.jelly.lib.ui.JFormView"
+    android:id="@+id/todo_formview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    jelly:data_model="@raw/todo_model">
+
+    <com.jelly.lib.view.JSpinner
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/priorities"
+        jelly:data_field="category" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.jelly.lib.view.JEditText
+            android:id="@+id/todo_edit_summary"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/todo_edit_summary"
+            android:imeOptions="actionNext"
+            jelly:data_field="summary" />
+    </LinearLayout>
+
+    <com.jelly.lib.view.JEditText
+        android:id="@+id/todo_edit_description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="17dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/todo_edit_description"
+        android:imeOptions="actionNext"
+        jelly:data_field="description" />
+
+    <com.jelly.lib.view.JButton
+        android:id="@+id/todo_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/todo_edit_confirm"
+        jelly:formview="@id/todo_formview"
+        jelly:onClick="save()" />
+    
+</com.jelly.lib.view.JFormView>
