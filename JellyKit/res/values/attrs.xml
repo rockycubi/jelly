@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Data Bind -->
+    <declare-styleable name="Jelly_DataBind">
+        <!-- Used by View to bind JDataModal -->
+        <attr name="data_model" format="reference"></attr>
+        <attr name="data_field" format="string"></attr>
+    </declare-styleable>
+    
+     <!-- Events -->
+    <declare-styleable name="Jelly_Event">
+        <!-- Used by View to handle events -->
+        <attr name="onClick" format="string"></attr>
+        <attr name="onLongClick" format="string"></attr>
+        <!-- Used by ListView to handle events -->
+        <attr name="onItemClick" format="string"></attr>
+    </declare-styleable>
+    
+    <!-- UI extension -->
+    <declare-styleable name="Jelly_UI">
+        <!-- Used by View to handle events -->
+        <attr name="row_layout" format="reference"></attr>
+        <attr name="formview" format="reference"></attr>
+    </declare-styleable>
+
+</resources>
