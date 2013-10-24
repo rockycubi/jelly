@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DataModal 
+<DataModel 
     id="todo_model"
     contentprovider_uri="content://com.jelly.app.contentprovider/todo">
     <Field id="_id" type="integer"/>
     <Field id="category" type="string"/>
     <Field id="summary" type="string"/>
     <Field id="description" type="string"/>
-</DataModal>
+</DataModel>
