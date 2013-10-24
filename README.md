@@ -3,7 +3,7 @@ jelly
 
 Jelly is an Android library that enables fast application development with much less code. 
 
-* What can Jelly library help developers
+* [How Jelly helps Android development](https://github.com/rockycubi/jelly/wiki/How-Jelly-Helps-Android-Development)
 * Jelly library structure
 * Data Model API
 * Content Provider
