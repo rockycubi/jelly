@@ -63,9 +63,7 @@ public class JResource {
 		// find the element by id
 		Element elem = dom.getDocumentElement(); // dom.getElementById(datamodelId);
 
-		JDataModel dm = new JDataModel(mContext, elem);
-
-		// TODO: 貌似不需要如下的代码
+		JDataModel dm = new JDataModel(mContext, elem, datamodelId);
 
 		// String classname = elem.getAttribute("class");
 		// if (classname == "") {
@@ -81,7 +79,6 @@ public class JResource {
 		// }
 		// }
 
-		// 必须要做构造函数中给出，因为构造函数中要load东西
 		// dm.setContext(mContext);
 		// dm.loadXmlElement(elem);
 

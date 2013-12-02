@@ -14,11 +14,15 @@ public class JListView extends ListView {
 	public JListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		mHelper = new JListViewHelper(this, attrs);
+		initViewHelper(context, attrs);
 	}
 
 	public JListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+	}
+	
+	protected void initViewHelper(Context context, AttributeSet attrs) {
+		mHelper = new JListViewHelper(this, attrs);
 	}
 
 	public void release() {

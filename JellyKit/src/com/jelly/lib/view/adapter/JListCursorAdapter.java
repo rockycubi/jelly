@@ -3,6 +3,8 @@ package com.jelly.lib.view.adapter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,12 +19,14 @@ public class JListCursorAdapter extends ResourceCursorAdapter {
 	protected ArrayList<String> mFromFields;
 	protected ArrayList<Integer> mToResIds;
 	protected int[] mFromIndexes;
+	protected Context mContext;
 	
 	public JListCursorAdapter(Context context, int layout, Cursor c, int flags) {
 		super(context, layout, c, flags);
 
 		mFromFields = new ArrayList<String>();
 		mToResIds = new ArrayList<Integer>();
+		mContext = context;
 	}
 
 	// when the view will be created for first time

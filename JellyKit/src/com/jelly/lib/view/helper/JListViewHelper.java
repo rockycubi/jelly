@@ -7,6 +7,7 @@ import com.jelly.lib.view.adapter.JListCursorAdapter;
 import com.jelly.lib.model.JDataModel;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -16,7 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * TODO implements LoaderManager.LoaderCallbacks<Cursor>
+ * 
  */
 public class JListViewHelper extends JViewHelper implements 
 	JDataModel.LoadListener {
@@ -24,6 +25,9 @@ public class JListViewHelper extends JViewHelper implements
 	protected ListView mLv;
 	protected JListCursorAdapter mCursorAdapter;
 	protected int mRowLayout;
+	protected int mHeaderRowLayout;
+	protected int mFooterRowLayout;
+	protected ProgressDialog pd;
 	
 	/*
 	 * onListItemClick action
@@ -45,20 +49,49 @@ public class JListViewHelper extends JViewHelper implements
 			aEvents.recycle();
 		}
 		
-		// read row_layout attribute
+		// read UI attributes
 		TypedArray a = mContext.obtainStyledAttributes(attrs,
 				R.styleable.Jelly_UI);
+		
+		// read header_row_layout and footer_row_layout
+		mHeaderRowLayout = a.getResourceId(R.styleable.Jelly_UI_header_row_layout, 0);
+		mFooterRowLayout = a.getResourceId(R.styleable.Jelly_UI_footer_row_layout, 0);
+		
+		// load header and footer
+		Activity act =  (Activity)mContext;
+		if (mHeaderRowLayout > 1) {
+			View header = act.getLayoutInflater().inflate(mHeaderRowLayout, null);
+			mLv.addHeaderView(header);
+		}
+		if (mFooterRowLayout > 1) {
+			View footer = act.getLayoutInflater().inflate(mFooterRowLayout, null);
+			mLv.addFooterView(footer);
+		}
+		
+		// read row_layout attribute
 		mRowLayout = a.getResourceId(R.styleable.Jelly_UI_row_layout, 0);
 
 		mCursorAdapter = new JListCursorAdapter(mContext, mRowLayout, null, 0);
 		mLv.setAdapter(mCursorAdapter);
 		
-		// start data loading
-		mDataModel.load(null, null, (Activity)mContext, this);
-		
 		a.recycle();
-		
+
+		loadData();
 		initEventListeners();
+		mLv.setItemsCanFocus(true);
+	}
+	
+	protected void loadHeaderFooterView() {
+		
+	}
+	
+	protected void loadData() {
+		// show loading progress bar
+		String loading_title = mContext.getResources().getString(R.string.loading_title);
+		String loading_message = mContext.getResources().getString(R.string.loading_message);
+		pd = ProgressDialog.show(mContext, loading_title, loading_message, true, true);
+		// start data loading
+		mDataModel.load(null, null, (Activity)mContext, this, false);
 	}
 	
 	protected void initEventListeners() {
@@ -79,7 +112,15 @@ public class JListViewHelper extends JViewHelper implements
 	}
 	
 	public void reload() {
-		mDataModel.load(null, null, (Activity)mContext, this);
+		// show loading progress bar
+		String loading_title = mContext.getResources().getString(R.string.loading_title);
+		String loading_message = mContext.getResources().getString(R.string.loading_message);
+		pd = ProgressDialog.show(mContext, loading_title, loading_message, true, true);
+		
+		mDataModel.load(null, null, (Activity)mContext, this, true);
+		
+		// scroll to top
+		mLv.setSelection(0);
 	}
 	
 	/*
@@ -100,6 +141,10 @@ public class JListViewHelper extends JViewHelper implements
 	@Override
 	public void onLoadFinished(Cursor c) {
 		mCursorAdapter.swapCursor(c);
+		// hide the progress dialog
+		if (pd != null) {
+			pd.dismiss();
+		}
 	}
 
 	@Override

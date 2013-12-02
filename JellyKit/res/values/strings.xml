@@ -1,5 +1,8 @@
 <resources>
 
     <string name="app_name">JellyKit</string>
+    
+    <string name="loading_title">Please wait ...</string>
+    <string name="loading_message">Loading data</string>
 
 </resources>

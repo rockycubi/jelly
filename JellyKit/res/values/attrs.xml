@@ -19,8 +19,11 @@
     
     <!-- UI extension -->
     <declare-styleable name="Jelly_UI">
-        <!-- Used by View to handle events -->
+        <!-- view layout reference use by listview -->
         <attr name="row_layout" format="reference"></attr>
+        <attr name="header_row_layout" format="reference"></attr>
+        <attr name="footer_row_layout" format="reference"></attr>
+        
         <attr name="formview" format="reference"></attr>
     </declare-styleable>
 

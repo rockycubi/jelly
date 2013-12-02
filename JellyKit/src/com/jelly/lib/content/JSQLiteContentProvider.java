@@ -171,6 +171,9 @@ public class JSQLiteContentProvider extends ContentProvider {
 				limitStr += "," + offset;
 			}
 		}
+		if (limit.equals("-1")) {
+			limitStr = null;
+		}
 
 		// make the query
 		Cursor cursor = builder.query(db, projection, selection,

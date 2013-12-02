@@ -41,20 +41,22 @@ public class JDataModel extends JMetaObject implements
 		public String id;
 		public String selection;
 		public String sortOrder;
-		public String limit;
-		public String offset;
+		public int limit;
+		public int offset;
 		public void reset() {
 			id = null;
 			selection = null;
 			sortOrder = null;
-			limit = null;
-			offset = null;
+			limit = -1;
+			offset = 0;
 		}
 	}
 	
 	//TODO:¡¡We should be able to read the value from Provider later.
 	//
 	public static final String KEY_FIELD_NAME = "_id";
+	
+	protected int modelId;
 
 	/**
 	 * The cursor object from ContentProvider.
@@ -81,11 +83,12 @@ public class JDataModel extends JMetaObject implements
 	// Public methods
 	//////////////////////////////////
 
-	public JDataModel(Context context, Element elem) {
+	public JDataModel(Context context, Element elem, int modelId) {
 		mContext = context;
 		mDataFields = new HashMap<String, JDataField>();
 		mLoadParams = new LoadParameters();
 		loadXmlElement(elem);
+		this.modelId = modelId;
 	}
 
 	/**
@@ -126,15 +129,35 @@ public class JDataModel extends JMetaObject implements
 	/*
 	 * async query using activity loader manager
 	 * callback loadlistener instance when data loading is completed
-	 * TODO: set selection, sortOrder as member vars such that they can be use in onCreateLoader
-	 * TODO: add limit, offset support
 	 */
-	public void load(String selection, String sortOrder, Activity act, LoadListener loadListener) {
+	public void load(String selection, String sortOrder, 
+				Activity act, LoadListener loadListener, boolean reload) {
 		mLoadListener = loadListener;
 		mLoadParams.reset();
 		mLoadParams.selection = selection;
 		mLoadParams.sortOrder = sortOrder;
-		act.getLoaderManager().initLoader(0, null, this);
+		if (reload) {
+			act.getLoaderManager().restartLoader(modelId, null, this);
+		} else {
+			act.getLoaderManager().initLoader(modelId, null, this);
+		}
+	}
+	
+	/*
+	 * async query using activity loader manager
+	 * callback loadlistener instance when data loading is completed
+	 */
+	public void load(String selection, String sortOrder, int limit, int offset, 
+				Activity act, LoadListener loadListener, boolean reload) {
+		mLoadListener = loadListener;
+		mLoadParams.reset();
+		mLoadParams.selection = selection;
+		mLoadParams.sortOrder = sortOrder;
+		if (reload) {
+			act.getLoaderManager().restartLoader(modelId, null, this);
+		} else {
+			act.getLoaderManager().initLoader(modelId, null, this);
+		}
 	}
 	
 	/*
@@ -142,37 +165,12 @@ public class JDataModel extends JMetaObject implements
 	 * callback loadlistener instance when data loading is completed
 	 * TODO: set id as member vars such that they can be use in onCreateLoader
 	 */
-	public void load(String id, Activity act, LoadListener loadListener) {
+	public void load(String id, 
+				Activity act, LoadListener loadListener) {
 		mLoadListener = loadListener;
 		mLoadParams.reset();
 		mLoadParams.id = id;
-		act.getLoaderManager().initLoader(0, null, this);
-	}
-
-	public void find(String selection, String sortOrder) {
-		Cursor c = query(selection, sortOrder);
-		moveCursorTo(c, 0);
-	}
-	
-	public void findById(long id) {
-		query(id);
-	}
-	
-	public void find(String selection, String sortOrder, int limit, int offset) {
-		Cursor c = query(selection, sortOrder, limit, offset);
-		moveCursorTo(c, 0);
-	}
-	
-	protected void moveCursorTo(Cursor c, int offset) {
-		if (c != null) {
-			c.move(offset);
-			// set field values
-			for (String key : mDataFields.keySet()) {
-				String value = mCursor.getString(mCursor
-						.getColumnIndexOrThrow(key));
-				mDataFields.get(key).setValue(value);
-			}
-		}
+		act.getLoaderManager().initLoader(modelId, null, this);
 	}
 	
 	public Cursor query(String selection, String sortOrder) {
@@ -217,20 +215,6 @@ public class JDataModel extends JMetaObject implements
 			e.printStackTrace();
 		}
 		return mCursor;
-	}
-	
-	/**
-	 * Save the edited data into data source. 
-	 * Example:
-		JDataModel model = JResource.getInstance(context).getDataModel("raw/todo_model");
-		model.findById(1);
-		model.setField("summary", "meeting notes - update");
-		model.setField("description", "Steve, John and Jessica had a meeting per holiday marketing plan");
-		model.save();
-	 */
-	public void save() {
-		Log.i("JDataModel", "save() is called");
-		save(mCV);
 	}
 
 	/**
@@ -294,10 +278,16 @@ public class JDataModel extends JMetaObject implements
 		String selection = mLoadParams.selection;
 		String sort = mLoadParams.sortOrder;
 		String providerUriStr = getProviderUri();
+		Uri providerUri = Uri.parse(providerUriStr);
 		if (mLoadParams.id != null) {
 			providerUriStr += "/" + mLoadParams.id;
+			providerUri = Uri.parse(providerUriStr);
+		} else {
+			providerUri = Uri.parse(mProviderUri).buildUpon()
+					.appendQueryParameter("limit", String.valueOf(mLoadParams.limit))
+					.appendQueryParameter("offset", String.valueOf(mLoadParams.offset))
+					.build();
 		}
-		Uri providerUri = Uri.parse(providerUriStr);
 		CursorLoader cursorLoader = new CursorLoader(mContext, providerUri,
 				projection, selection, null, sort);
 		return cursorLoader;
