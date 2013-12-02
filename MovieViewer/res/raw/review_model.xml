@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataModel 
+    id="review_model"
+    class="com.jelly.lib.model.JDataModel"
+    contentprovider_uri="content://com.jelly.movieviewer.contentprovider/reviews">
+    <Field id="id" type="integer"/>
+    <Field id="critics" type="string"/>
+    <Field id="date" type="string"/>
+    <Field id="freshness" type="integer"/>
+    <Field id="publiation" type="string"/>
+    <Field id="quote" type="string"/> 
+    <Field id="link" type="string"/> 
+</DataModel>

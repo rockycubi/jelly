@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jelly="http://schemas.android.com/apk/res/com.jelly.app.movieviewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.jelly.lib.view.JListView
+        android:id="@+id/lvIntheaters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        jelly:data_model="@raw/intheaters_model"
+        jelly:row_layout="@layout/movie_row"
+        jelly:onItemClick="startActivity(com.jelly.app.movieviewer.MovieDetailActivity)" />
+
+</LinearLayout>

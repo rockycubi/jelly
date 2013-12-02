@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jelly="http://schemas.android.com/apk/res/com.jelly.app.movieviewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+        
+     <!-- movie review listview -->
+     <com.jelly.app.movieviewer.JReviewListView
+	      android:id="@+id/lvReviews"
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      jelly:data_model="@raw/review_model"
+	      jelly:row_layout="@layout/review_row"
+	      jelly:header_row_layout="@layout/movie_detail_header" />
+	    
+</LinearLayout> 
+

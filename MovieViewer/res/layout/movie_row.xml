@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jelly="http://schemas.android.com/apk/res/com.jelly.app.movieviewer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="2dip" >
+    <!-- ListRow Left side Thumbnail image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:layout_centerVertical="true"
+        android:padding="0dip" >
+        <com.jelly.lib.view.JImageView
+            android:id="@+id/list_image"
+            android:contentDescription="@string/app_name"
+            android:layout_width="60dip"
+            android:layout_height="90dip"
+            android:src="@android:drawable/btn_star_big_on"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            jelly:data_field="thumbnail" />
+    </LinearLayout>
+
+    <!-- Title-->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_marginLeft="5dip"
+        android:paddingTop ="5dip"
+        android:paddingBottom ="2dip"
+        android:text="@string/title"
+        android:textColor="#040404"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:typeface="sans" 
+       	jelly:data_field="title"/>
+   
+    <com.jelly.app.movieviewer.JScoreImageView
+        android:id="@+id/ivFresh"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:layout_below="@+id/tvTitle"
+	    android:layout_alignLeft="@+id/tvTitle"
+	    android:paddingTop="2dip"
+	    android:focusable="false"
+        android:focusableInTouchMode="false"
+	    android:src="@drawable/fresh_tomatoe_mob"
+	    jelly:data_field="critics_score"/>
+
+   	<!-- Critics Score -->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvCriticsScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/ivFresh"
+        android:paddingTop="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/critics_score"
+        android:textColor="#343434"
+        android:textSize="12dip" 
+        jelly:data_field="critics_score"/>
+    <!-- Percentage -->
+    <TextView 
+        android:id="@+id/tvSep1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/tvCriticsScore"
+        android:paddingTop="0dip"
+        android:text="%"
+        android:textColor="#343434"
+        android:textSize="12dip" />
+    
+    <!-- Cast 1 -->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvCast1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivFresh"
+        android:layout_alignLeft="@+id/ivFresh"
+        android:paddingTop="2dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/cast1"
+        android:textColor="#343434"
+        android:textSize="12dip" 
+        jelly:data_field="cast1"/>
+    <TextView 
+        android:id="@+id/tvSep1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivFresh"
+        android:layout_toRightOf="@+id/tvCast1"
+        android:paddingTop="2dip"
+        android:text=", "
+        android:textColor="#343434"
+        android:textSize="12dip" />
+    <!-- Cast 2 -->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvCast2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivFresh"
+        android:layout_toRightOf="@+id/tvSep1"
+        android:paddingTop="2dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/cast2"
+        android:textColor="#343434"
+        android:textSize="12dip" 
+        jelly:data_field="cast2"/>
+        
+    <!-- Release date -->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCast1"
+        android:layout_alignLeft="@+id/tvCast1"
+        android:paddingTop="2dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/release_date"
+        android:textColor="#343434"
+        android:textSize="12dip" 
+        jelly:data_field="release_date"/>
+    <TextView 
+        android:id="@+id/tvSep2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCast1"
+        android:layout_toRightOf="@+id/tvReleaseDate"
+        android:paddingTop="2dip"
+        android:text=", "
+        android:textColor="#343434"
+        android:textSize="12dip" />
+    <!-- Rating -->
+    <com.jelly.lib.view.JTextView
+        android:id="@+id/tvRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCast1"
+        android:layout_toRightOf="@+id/tvSep2"
+        android:layout_marginLeft="5dip"
+        android:paddingTop="2dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/rating"
+        android:textColor="#343434"
+        android:textSize="12dip" 
+        jelly:data_field="rating"/>
+
+</RelativeLayout>
