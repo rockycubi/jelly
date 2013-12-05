@@ -20,7 +20,7 @@ public class JReviewListViewHelper extends JListViewHelper {
 		mLv.addHeaderView(header);
 	}*/
 
-	protected void loadData() {
+	public void loadData() {
 		// get the movie id from extra
 		String id = (String)getInExtraData("id");
 		

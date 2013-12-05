@@ -82,14 +82,14 @@ public class JViewHelper {
 				R.styleable.Jelly_DataBind);
 		try {
 			mDataModelId = aDataBind.getResourceId(R.styleable.Jelly_DataBind_data_model, 0);
-			Log.i("JViewHelper", "data module id = " + mDataModelId);
+			//Log.i("JViewHelper", "data module id = " + mDataModelId);
 			if (mDataModelId != 0) {
 				mDataModel = JResource.getInstance(mContext).getDataModel(
 						mDataModelId); // raw/xml_filename
 			}
 			mFieldName = aDataBind
 					.getString(R.styleable.Jelly_DataBind_data_field);
-			Log.i("JViewHelper", "fieldName = " + mFieldName);
+			//Log.i("JViewHelper", "fieldName = " + mFieldName);
 
 
 		} finally {

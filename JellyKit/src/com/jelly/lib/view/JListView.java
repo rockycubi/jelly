@@ -33,8 +33,14 @@ public class JListView extends ListView {
 		return mHelper.getDataModel();
 	}
 	
+	public void loadData(String selection, String sortOrder) 
+	{
+		mHelper.setSelection(selection);
+		mHelper.setSortOrder(sortOrder);
+		mHelper.loadData();
+	}
+
 	public void reload() {
 		mHelper.reload();
 	}
-
 }

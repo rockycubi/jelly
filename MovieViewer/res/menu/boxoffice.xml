@@ -4,7 +4,8 @@
     <item android:id="@+id/action_search"
           android:icon="@drawable/ic_action_search"
           android:title="@string/action_search"
-          android:showAsAction="ifRoom"/>
+          android:showAsAction="collapseActionView|ifRoom"
+          android:actionViewClass="android.widget.SearchView"/>
      
     <!-- Refresh -->
     <item android:id="@+id/action_refresh"

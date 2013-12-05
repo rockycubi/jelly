@@ -8,9 +8,15 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
+import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SearchView;
+
 import com.jelly.lib.view.JListView;
 
 public class BoxofficeActivity extends Activity {
@@ -57,6 +63,17 @@ public class BoxofficeActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.boxoffice, menu);
+		
+		// Associate searchable configuration with the SearchView
+	    SearchManager searchManager =
+	           (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    SearchView searchView =
+	            (SearchView) menu.findItem(R.id.action_search).getActionView();
+	    ComponentName comp = getComponentName();
+	    SearchableInfo si = searchManager.getSearchableInfo(comp);
+	    searchView.setSearchableInfo(si);
+	            //searchManager.getSearchableInfo(getComponentName()));
+
 		return true;
 	}
 	

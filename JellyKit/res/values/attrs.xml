@@ -19,6 +19,10 @@
     
     <!-- UI extension -->
     <declare-styleable name="Jelly_UI">
+        <!-- listview or formview data loading parameters -->
+        <attr name="data_autoload" format="integer"></attr>
+        <attr name="intent_querystring" format="string"></attr>
+        
         <!-- view layout reference use by listview -->
         <attr name="row_layout" format="reference"></attr>
         <attr name="header_row_layout" format="reference"></attr>

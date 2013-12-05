@@ -27,7 +27,11 @@ public class JListViewHelper extends JViewHelper implements
 	protected int mRowLayout;
 	protected int mHeaderRowLayout;
 	protected int mFooterRowLayout;
+	protected String mIntentQueryString;
+	protected int mDataAutoLoad;
 	protected ProgressDialog pd;
+	protected String mSelection = null;
+	protected String mSortOrder = null;
 	
 	/*
 	 * onListItemClick action
@@ -56,7 +60,28 @@ public class JListViewHelper extends JViewHelper implements
 		// read header_row_layout and footer_row_layout
 		mHeaderRowLayout = a.getResourceId(R.styleable.Jelly_UI_header_row_layout, 0);
 		mFooterRowLayout = a.getResourceId(R.styleable.Jelly_UI_footer_row_layout, 0);
+		// read data loading parameters
+		mIntentQueryString = a.getString(R.styleable.Jelly_UI_intent_querystring);
+		mDataAutoLoad = a.getInt(R.styleable.Jelly_UI_data_autoload, 1);
 		
+		// read row_layout attribute
+		mRowLayout = a.getResourceId(R.styleable.Jelly_UI_row_layout, 0);
+		
+		a.recycle();
+		
+		loadHeaderFooterView();
+
+		mCursorAdapter = new JListCursorAdapter(mContext, mRowLayout, null, 0);
+		mLv.setAdapter(mCursorAdapter);
+
+		if (mDataAutoLoad > 0) {
+			loadData();
+		}
+		initEventListeners();
+		mLv.setItemsCanFocus(true);
+	}
+	
+	protected void loadHeaderFooterView() {
 		// load header and footer
 		Activity act =  (Activity)mContext;
 		if (mHeaderRowLayout > 1) {
@@ -67,31 +92,23 @@ public class JListViewHelper extends JViewHelper implements
 			View footer = act.getLayoutInflater().inflate(mFooterRowLayout, null);
 			mLv.addFooterView(footer);
 		}
-		
-		// read row_layout attribute
-		mRowLayout = a.getResourceId(R.styleable.Jelly_UI_row_layout, 0);
-
-		mCursorAdapter = new JListCursorAdapter(mContext, mRowLayout, null, 0);
-		mLv.setAdapter(mCursorAdapter);
-		
-		a.recycle();
-
-		loadData();
-		initEventListeners();
-		mLv.setItemsCanFocus(true);
 	}
 	
-	protected void loadHeaderFooterView() {
-		
-	}
-	
-	protected void loadData() {
+	public void loadData() {
 		// show loading progress bar
 		String loading_title = mContext.getResources().getString(R.string.loading_title);
 		String loading_message = mContext.getResources().getString(R.string.loading_message);
 		pd = ProgressDialog.show(mContext, loading_title, loading_message, true, true);
 		// start data loading
-		mDataModel.load(null, null, (Activity)mContext, this, false);
+		mDataModel.load(mSelection, mSortOrder, (Activity)mContext, this, false);
+	}
+	
+	public void setSelection(String selection) {
+		mSelection = selection;
+	}
+	
+	public void setSortOrder(String sortOrder) {
+		mSortOrder = sortOrder;
 	}
 	
 	protected void initEventListeners() {
@@ -117,7 +134,7 @@ public class JListViewHelper extends JViewHelper implements
 		String loading_message = mContext.getResources().getString(R.string.loading_message);
 		pd = ProgressDialog.show(mContext, loading_title, loading_message, true, true);
 		
-		mDataModel.load(null, null, (Activity)mContext, this, true);
+		mDataModel.load(mSelection, mSortOrder, (Activity)mContext, this, true);
 		
 		// scroll to top
 		mLv.setSelection(0);
