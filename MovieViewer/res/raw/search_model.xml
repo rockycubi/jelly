@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataModel 
+    id="movie_model"
+    class="com.jelly.lib.model.JDataModel"
+    contentprovider_uri="content://com.jelly.movieviewer.contentprovider/search?limit=20">
+    <Field id="id" type="integer"/>
+    <Field id="title" type="string"/>
+    <Field id="release_date" type="integer"/>
+    <Field id="rating" type="string"/>
+    <Field id="critics_score" type="string"/> 
+    <Field id="audience_score" type="string"/> 
+    <Field id="thumbnail" type="string"/>
+    <Field id="cast1" type="string"/>
+    <Field id="cast2" type="string"/>
+</DataModel>
