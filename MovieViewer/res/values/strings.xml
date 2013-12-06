@@ -23,7 +23,7 @@
     <string name="audience_score">Audience Score</string>
     <string name="synopsis">Synopsis</string>
     
-    <string name="no_review">No review yet</string>
+    <string name="no_review">No review</string>
     
     <string name="critic">Critic</string>
     <string name="date">Date</string>

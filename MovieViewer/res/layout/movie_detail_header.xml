@@ -60,7 +60,7 @@
 			    jelly:data_field="critics_score"/>
 		
 		   	<!-- Critics Score -->
-		    <com.jelly.lib.view.JTextView
+		    <com.jelly.app.movieviewer.JScoreTextView
 		        android:id="@+id/tvCriticsScore"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
@@ -73,24 +73,15 @@
 		        android:textColor="#343434"
 		        android:textSize="12dip" 
 		        jelly:data_field="critics_score"/>
-		    <!-- Percentage -->
-		    <TextView 
-		        android:id="@+id/tvPerc1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@+id/tvTitle"
-		        android:layout_toRightOf="@+id/tvCriticsScore"
-		        android:paddingTop="0dip"
-		        android:text="% "
-		        android:textColor="#343434"
-		        android:textSize="12dip" />
+
 		    <TextView 
 		        android:id="@+id/tvScoreNote1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_below="@+id/tvTitle"
-		        android:layout_toRightOf="@+id/tvPerc1"
+		        android:layout_toRightOf="@+id/tvCriticsScore"
 		        android:paddingTop="0dip"
+		        android:layout_marginLeft="2dip"
 		        android:text="@string/critics_score"
 		        android:textColor="#343434"
 		        android:textSize="12dip" />
@@ -105,7 +96,7 @@
 			    android:src="@drawable/fresh_tomatoe_mob"
 			    jelly:data_field="audience_score"/>
 		    <!-- Audience Score -->
-		    <com.jelly.lib.view.JTextView
+		    <com.jelly.app.movieviewer.JScoreTextView
 		        android:id="@+id/tvAudienceScore"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
@@ -118,24 +109,15 @@
 		        android:textColor="#343434"
 		        android:textSize="12dip" 
 		        jelly:data_field="audience_score"/>
-		    <!-- Percentage -->
-		    <TextView 
-		        android:id="@+id/tvPerc2"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@+id/ivFresh"
-		        android:layout_toRightOf="@+id/tvAudienceScore"
-		        android:paddingTop="0dip"
-		        android:text="% "
-		        android:textColor="#343434"
-		        android:textSize="12dip" />
+
 		    <TextView 
 		        android:id="@+id/tvScoreNote2"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_below="@+id/ivFresh"
-		        android:layout_toRightOf="@+id/tvPerc2"
+		        android:layout_toRightOf="@+id/tvAudienceScore"
 		        android:paddingTop="0dip"
+		        android:layout_marginLeft="2dip"
 		        android:text="@string/audience_score"
 		        android:textColor="#343434"
 		        android:textSize="12dip" />

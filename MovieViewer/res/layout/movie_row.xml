@@ -54,7 +54,7 @@
 	    jelly:data_field="critics_score"/>
 
    	<!-- Critics Score -->
-    <com.jelly.lib.view.JTextView
+    <com.jelly.app.movieviewer.JScoreTextView
         android:id="@+id/tvCriticsScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,17 +67,7 @@
         android:textColor="#343434"
         android:textSize="12dip" 
         jelly:data_field="critics_score"/>
-    <!-- Percentage -->
-    <TextView 
-        android:id="@+id/tvSep1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_toRightOf="@+id/tvCriticsScore"
-        android:paddingTop="0dip"
-        android:text="%"
-        android:textColor="#343434"
-        android:textSize="12dip" />
+
     
     <!-- Cast 1 -->
     <com.jelly.lib.view.JTextView
@@ -129,23 +119,14 @@
         android:textColor="#343434"
         android:textSize="12dip" 
         jelly:data_field="release_date"/>
-    <TextView 
-        android:id="@+id/tvSep2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCast1"
-        android:layout_toRightOf="@+id/tvReleaseDate"
-        android:paddingTop="2dip"
-        android:text=", "
-        android:textColor="#343434"
-        android:textSize="12dip" />
+
     <!-- Rating -->
     <com.jelly.lib.view.JTextView
         android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvCast1"
-        android:layout_toRightOf="@+id/tvSep2"
+        android:layout_toRightOf="@+id/tvReleaseDate"
         android:layout_marginLeft="5dip"
         android:paddingTop="2dip"
         android:layout_centerHorizontal="true"

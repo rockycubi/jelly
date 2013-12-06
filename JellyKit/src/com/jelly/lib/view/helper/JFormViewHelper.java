@@ -104,11 +104,24 @@ public class JFormViewHelper extends JViewHelper implements
 	protected void populateForm(Cursor c) {
 		c.moveToFirst();
 		
+		Class<?>[] paramTypes = new Class[1];
+    	paramTypes[0] = String.class;
+    	
 		for (int i=0; i<mFromFields.size(); i++) {
 			String field = mFromFields.get(i);
 			int columnIndex = c.getColumnIndexOrThrow(field);
 			String text = c.getString(columnIndex);
 			View v = mFv.findViewById(mToResIds.get(i));
+            // check if the view has setFieldValue method
+        	try {
+        		Method m = v.getClass().getMethod("setFieldValue", paramTypes);
+        		if (m != null) {
+        			m.invoke(v, text);
+        			continue;
+        		}
+        	} catch (Exception e) {
+        		// do nothing
+        	}
 			if (v instanceof TextView) {
                 setViewText((TextView) v, text);
             } else if (v instanceof ImageView) {

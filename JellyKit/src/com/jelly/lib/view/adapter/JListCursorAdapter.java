@@ -48,6 +48,9 @@ public class JListCursorAdapter extends ResourceCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         final int count = mToResIds.size();
 
+        Class<?>[] paramTypes = new Class[1];
+    	paramTypes[0] = String.class;
+    	
         for (int i = 0; i < count; i++) {
             final View v = view.findViewById(mToResIds.get(i));
             if (v != null) {
@@ -55,6 +58,17 @@ public class JListCursorAdapter extends ResourceCursorAdapter {
                 if (text == null) {
                     text = "";
                 }
+                
+                // check if the view has setFieldValue method
+            	try {
+            		Method m = v.getClass().getMethod("setFieldValue", paramTypes);
+            		if (m != null) {
+            			m.invoke(v, text);
+            			continue;
+            		}
+            	} catch (Exception e) {
+            		// do nothing
+            	}
 
                 if (v instanceof TextView) {
                     setViewText((TextView) v, text);

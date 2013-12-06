@@ -246,20 +246,29 @@ public class AppContentProvider extends ContentProvider {
 			JSONObject posters =  movieObject.getJSONObject("posters");
 			String thumbnail = posters.getString("profile");
 			JSONArray castArray = movieObject.getJSONArray("abridged_cast");
-			String cast1 = castArray.getJSONObject(0).getString("name");
-			if (castArray.getJSONObject(0).has("characters")) {
-				JSONArray char1Array = castArray.getJSONObject(0).getJSONArray("characters");
-				String cast1Chars = char1Array.getString(0);
-				cast1 += " as " + cast1Chars;
+			String cast1 = "";
+			if (castArray.length() > 0) {
+				cast1 = castArray.getJSONObject(0).getString("name");
+				if (castArray.getJSONObject(0).has("characters")) {
+					JSONArray char1Array = castArray.getJSONObject(0).getJSONArray("characters");
+					String cast1Chars = char1Array.getString(0);
+					cast1 += " as " + cast1Chars;
+				}
 			}
-			String cast2 = (castArray.length() > 1) ?  castArray.getJSONObject(1).getString("name") : "";
-			if (castArray.getJSONObject(1).has("characters")) {
-				JSONArray char2Array = castArray.getJSONObject(1).getJSONArray("characters");
-				String cast2Chars = char2Array.getString(0);
-				cast2 += " as " + cast2Chars;
+			String cast2 = "";
+			if (castArray.length() > 1) {
+				cast2 = castArray.getJSONObject(1).getString("name");
+				if (castArray.getJSONObject(1).has("characters")) {
+					JSONArray char2Array = castArray.getJSONObject(1).getJSONArray("characters");
+					String cast2Chars = char2Array.getString(0);
+					cast2 += " as " + cast2Chars;
+				}
 			}
-			JSONArray directorArray = movieObject.getJSONArray("abridged_directors");
-			String director1 = directorArray.getJSONObject(0).getString("name");
+			String director1 = "";
+			if (movieObject.has("abridged_directors")) {
+				JSONArray directorArray = movieObject.getJSONArray("abridged_directors");
+				director1 = directorArray.getJSONObject(0).getString("name");
+			}
 			cursor.addRow(new Object[]{id,title,release_date,rating,critics_score,audience_score,thumbnail,cast1,cast2,director1,synopsis});
 			Log.i("AppContentProvider", movieObject.getString("title"));
 		} catch (Exception e) {
@@ -278,6 +287,14 @@ public class AppContentProvider extends ContentProvider {
 			Log.i("AppContentProvider", "Number of reviews " + reviewArray.length());
 			for (int i = 0; i < reviewArray.length(); i++) {
 				JSONObject reviewObject = reviewArray.getJSONObject(i);
+				String quote = "";
+				if (reviewObject.has("quote")) {
+					quote =  reviewObject.getString("quote");
+					if (quote.equals("")) continue;
+				}
+				else {
+					continue;
+				}
 				String id = (i+1)+"";
 				String critic =  reviewObject.getString("critic");
 				String date =  reviewObject.getString("date");
@@ -287,7 +304,7 @@ public class AppContentProvider extends ContentProvider {
 					freshness = "60";
 				}
 				String publication =  reviewObject.getString("publication");
-				String quote =  reviewObject.getString("quote");
+				
 				String link = "";
 				if (reviewObject.getJSONObject("links").has("review")) {
 					link =  reviewObject.getJSONObject("links").getString("review");

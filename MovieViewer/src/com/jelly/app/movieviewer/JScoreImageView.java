@@ -29,12 +29,19 @@ public class JScoreImageView extends JImageView {
 		super(context, attrs, defStyle);
 	}
 	
-	public void setImageResource(int score) {
-		if (score >= 50) {
-			super.setImageResource(R.drawable.fresh_tomatoe_mob);
+	public void setFieldValue(String fieldValue) {
+		// if the value is -1
+		if (fieldValue.equals("-1")) {
+			setImageResource(R.drawable.ic_action_about);
 		}
 		else {
-			super.setImageResource(R.drawable.rotten_tomatoe_mob);
+			int score = Integer.parseInt(fieldValue);
+			if (score >= 50) {
+				setImageResource(R.drawable.fresh_tomatoe_mob);
+			}
+			else {
+				setImageResource(R.drawable.rotten_tomatoe_mob);
+			}
 		}
 	}
 }
