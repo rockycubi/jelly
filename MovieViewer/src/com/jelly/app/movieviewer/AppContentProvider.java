@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
@@ -111,7 +113,12 @@ public class AppContentProvider extends ContentProvider {
 	protected Cursor searchMovies(Uri uri, String selection) {
 		String url = MOVIE_SERVICE_URL + "/movies.json";
 		url += "?apikey="+apikey;
-		url += "&"+selection;
+		String queryStr = selection.replace("q=", "");
+		try {
+			url += "&q=" + URLEncoder.encode(queryStr, "UTF-8");
+		} catch (UnsupportedEncodingException ex) {
+			Log.e("AppContentProvider", "Failed to URL encode "+queryStr);
+		}
 		String limit = uri.getQueryParameter("limit");
 		String offset = uri.getQueryParameter("offset");
 		int iOffset = Integer.parseInt(offset);
