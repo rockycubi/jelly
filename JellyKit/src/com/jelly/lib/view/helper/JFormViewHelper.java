@@ -42,10 +42,15 @@ public class JFormViewHelper extends JViewHelper implements
 		
 		mFv = (JFormView)v;
 		
+		// get extra data "id"
 		_id = (String)getInExtraData("id");
+		// get extra data "model", if has model, no need to load data from id
+		// _model = (String)getInExtraData("model");
 		
 		// start data loading
-		mDataModel.load(_id, (Activity)mContext, this);
+		if (_id != null && !_id.equals("")) {
+			mDataModel.load(_id, (Activity)mContext, this);
+		}
 	}
 	
 	public ContentValues getContentValues() {

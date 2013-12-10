@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    jelly:data_model="@raw/todo_model">
+    jelly:data_model="@raw/todo_model1">
 
     <com.jelly.lib.view.JSpinner
         android:id="@+id/category"

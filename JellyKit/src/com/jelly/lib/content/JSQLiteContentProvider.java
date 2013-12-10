@@ -166,15 +166,17 @@ public class JSQLiteContentProvider extends ContentProvider {
 		String offset = uri.getQueryParameter("offset");
 		String limitStr = null;
 		if (limit != null) {
-			limitStr = " LIMIT " + limit;
-			if (offset != null) {
-				limitStr += "," + offset;
+			if (limit.equals("-1")) {
+				limitStr = null;
+			}
+			else {
+				limitStr = " LIMIT " + limit;
+				if (offset != null) {
+					limitStr += "," + offset;
+				}
 			}
 		}
-		if (limit.equals("-1")) {
-			limitStr = null;
-		}
-
+		
 		// make the query
 		Cursor cursor = builder.query(db, projection, selection,
 		        selectionArgs, null, null, sortOrder, limitStr);

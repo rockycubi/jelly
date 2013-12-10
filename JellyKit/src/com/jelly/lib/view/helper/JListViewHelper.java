@@ -119,9 +119,13 @@ public class JListViewHelper extends JViewHelper implements
 			mLv.setOnItemClickListener(new OnItemClickListener() {
 				
 				@Override
-				public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 					mOutExtraData.clear();
 					mOutExtraData.put("id", Long.toString(id));
+					// get data from adapter and add in extra data
+					//Object itemData = mLv.getAdapter().getItem(position);
+		            //Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+		            // get data based on the model
 					invokeMethod(mOnItemClick);
 				}
 			});
