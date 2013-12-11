@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Movie Viewer</string>
+    <string name="app_name">Movie Finder</string>
     <string name="search_hint">Movie title</string>
     <string name="title_activity_in_theater">Movies in Theater</string>
     <string name="title_activity_dvd">Movies in DVD</string>
