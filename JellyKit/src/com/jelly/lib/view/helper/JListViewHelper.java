@@ -83,19 +83,24 @@ public class JListViewHelper extends JViewHelper implements
 	
 	protected void loadHeaderFooterView() {
 		// load header and footer
-		Activity act =  (Activity)mContext;
-		if (mHeaderRowLayout > 1) {
-			View header = act.getLayoutInflater().inflate(mHeaderRowLayout, null);
-			mLv.addHeaderView(header);
-		}
-		if (mFooterRowLayout > 1) {
-			View footer = act.getLayoutInflater().inflate(mFooterRowLayout, null);
-			mLv.addFooterView(footer);
+		if (mContext instanceof Activity) {
+			Activity act =  (Activity)mContext;
+			if (mHeaderRowLayout > 1) {
+				View header = act.getLayoutInflater().inflate(mHeaderRowLayout, null);
+				mLv.addHeaderView(header);
+			}
+			if (mFooterRowLayout > 1) {
+				View footer = act.getLayoutInflater().inflate(mFooterRowLayout, null);
+				mLv.addFooterView(footer);
+			}
 		}
 	}
 	
 	public void loadData() {
 		// show loading progress bar
+		if (mLv.isInEditMode()) {
+			return;
+		}
 		String loading_title = mContext.getResources().getString(R.string.loading_title);
 		String loading_message = mContext.getResources().getString(R.string.loading_message);
 		pd = ProgressDialog.show(mContext, loading_title, loading_message, true, true);

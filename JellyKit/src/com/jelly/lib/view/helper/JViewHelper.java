@@ -139,10 +139,12 @@ public class JViewHelper {
 	 */
 	protected Object getInExtraData(String key) {
 		// ask activity for extra data
-		Activity act = (Activity)mContext;
-		Bundle extras = act.getIntent().getExtras();
-		if (extras != null && extras.containsKey(key)) {
-			return extras.get(key);
+		if (mContext instanceof Activity) {
+			Activity act = (Activity)mContext;
+			Bundle extras = act.getIntent().getExtras();
+			if (extras != null && extras.containsKey(key)) {
+				return extras.get(key);
+			}
 		}
 		return null;
 	}

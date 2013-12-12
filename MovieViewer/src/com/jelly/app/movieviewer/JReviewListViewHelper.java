@@ -21,6 +21,9 @@ public class JReviewListViewHelper extends JListViewHelper {
 	}*/
 
 	public void loadData() {
+		if (mLv.isInEditMode()) {
+			return;
+		}
 		// get the movie id from extra
 		String id = (String)getInExtraData("id");
 		
