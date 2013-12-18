@@ -29,8 +29,6 @@ The first app is a simple todo list that allows user to add/edit/remove todo ite
 #### Movie Viewer
 
 The second app is a movie finder that pulls movie data from rottentomatoes API and presents to end user. This app is a typical content presenting app. It is close to real world application.
-<img src="https://github.com/rockycubi/jelly/raw/master/document/images/movie_intheater.png" title="Movie List" style="width: 150px;"/> 
-<img src="https://github.com/rockycubi/jelly/raw/master/document/images/movie_info.png" title="Movie Info" style="width: 150px;"/>
 
 ![Movie list](https://github.com/rockycubi/jelly/raw/master/document/images/movie_intheater.png) . 
 ![Movie info](https://github.com/rockycubi/jelly/raw/master/document/images/movie_info.png)
