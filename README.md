@@ -1,9 +1,15 @@
-jelly
+Android Jelly Library
 =====
 
 ### Overview of Jelly library
 
-Jelly is the library that allows developers to model your application by xml. It helps to avoid boilerplate code. It also fulfill common functionality such that developers can focus on their custom logic and UI.
+Jelly is an Android library that allows developers to model your application by xml. The library makes it possible for developers to
+* Bind Data on View xml
+* Bind Event handling on View xml
+* Build Content provider with database xml
+* Link View to Content provider with Model xml
+
+The xml helps to avoid boilerplate code. Jelly also fulfills common functionality such that developers can focus on their custom logic and UI.
 
 * [How Jelly helps Android development](https://github.com/rockycubi/jelly/wiki/How-Jelly-Helps-Android-Development)
 * [Jelly library structure](https://github.com/rockycubi/jelly/wiki/Jelly-Library-Structure)
